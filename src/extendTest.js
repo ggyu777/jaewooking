@@ -8,8 +8,6 @@ import { PDFViewer } from '@react-pdf/renderer';
 import MyDocument from './Mydocument.js'
 import { Page, Text, Link,Image, Document, StyleSheet } from '@react-pdf/renderer';
 
-import ExtendTestBlock from './extendTest.js';
-
 const styles = StyleSheet.create({
   body: {
     paddingTop: 35,
@@ -50,11 +48,8 @@ const styles = StyleSheet.create({
   }
 });
 
-// Create Document Component
-const MyDoc = () => {
-
-  return (
-<Document>
+const Content = ({ data }) => (
+  <>
     <Page size={{width:842,height:595}} style={styles.body}>
       <Text style={styles.header} fixed>
         ~ Created with react-pdf ~
@@ -230,25 +225,7 @@ const MyDoc = () => {
         `${pageNumber} / ${totalPages}`
       )} fixed />
     </Page>
-    <ExtendTestBlock/>
-  </Document>
-  )};
+  </>
+);
 
-function App() {
-  return (
-    <div className="App">
-         <PDFViewer style={{height:'100vh'}}>
-         <MyDoc />
-        </PDFViewer>
-        <br/>
-            <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
-            {({ blob, url, loading, error }) =>
-            loading ? 'Loading document...' : 'Download now!'
-            }
-            </PDFDownloadLink>
-      </div>
-  );
-};
-
-
-export default App;
+export default Content;
